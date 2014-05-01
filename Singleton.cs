@@ -33,6 +33,15 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 		}
 	}
 
+	protected virtual void onDestroy()
+	{
+		if (!isGlobalScope)
+		{
+			if (_instance == this)
+				_instance = null;
+		}
+	}
+
 	protected virtual void onAwake()
 	{
 		if (_instance != null && _instance != this)
